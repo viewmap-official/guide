@@ -397,3 +397,37 @@ input,button,select,textarea {
     }
 }
 
+/* 語言切換按鈕 */
+
+.language-switch {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.language-switch a {
+    display: inline-block;
+    padding: 10px 15px;
+    border: 1px solid #D5DEEA;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    color: #0F54A1;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: 0.2s ease;
+}
+
+.language-switch a:hover {
+    background-color: #F0F5FC;
+    border-color: #0F54A1;
+}
+
+.language-switch a.active {
+    background-color: #0F54A1;
+    border-color: #0F54A1;
+    color: #FFFFFF;
+}
