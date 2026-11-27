@@ -9,7 +9,6 @@ tabs.forEach(button => {
 });
 
 // 2. Hashtag 一鍵複製
-const copyLabels = ['一鍵複製', '一键复制', '한 번에 복사'];
 document.querySelectorAll('.copy').forEach(button => {
     button.addEventListener('click', async () => {
         const box = button.closest('.tagbox');
@@ -27,7 +26,7 @@ document.querySelectorAll('.copy').forEach(button => {
             try { ok = document.execCommand('copy'); } catch (error) {}
             if (ok) field.remove();
         }
-        status.textContent = (ok ? ['已複製', '已复制', '복사 완료'] : ['請手動複製', '请手动复制', '직접 복사해 주세요'])[window.guideLang || 0];
+        status.textContent = ok ? '已複製' : '請手動複製';
     });
 });
 
@@ -37,25 +36,3 @@ navLinks.forEach(link => link.addEventListener('click', () => {
     navLinks.forEach(item => item.classList.toggle('active', item === link));
 }));
 
-// 4. 三語切換
-const languageCodes = ['zh-Hant', 'zh-Hans', 'ko'];
-function setLanguage(index) {
-    const code = languageCodes[index];
-    const dictionary = window.guideTranslations?.[code];
-    if (!dictionary) return;
-    window.guideLang = index;
-    document.documentElement.lang = code;
-    document.title = dictionary[0];
-    document.querySelectorAll('[data-i18n]').forEach(element => {
-        const value = dictionary[Number(element.dataset.i18n)];
-        if (typeof value === 'string') element.textContent = value;
-    });
-    document.querySelectorAll('.status').forEach(element => element.textContent = '');
-    document.querySelectorAll('[data-lang]').forEach(button => {
-        button.setAttribute('aria-pressed', String(Number(button.dataset.lang) === index));
-    });
-}
-document.querySelectorAll('[data-lang]').forEach(button => {
-    button.addEventListener('click', () => setLanguage(Number(button.dataset.lang)));
-});
-setLanguage(0);
